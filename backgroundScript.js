@@ -1,4 +1,5 @@
 
+/* NAMESPACE */
 const ROTATE_IMAGE = {
   menuId      : "ROTATE_IMAGE_MENU_ID",
   browser     : ( "object" === typeof chrome ? chrome : browser ),
@@ -17,6 +18,10 @@ const ROTATE_IMAGE = {
   }
 };
 
+/**
+ * Register a new context menu item "Rotate Image".
+ * But only on <img> elements!
+ */
 ROTATE_IMAGE.browser.contextMenus.create({
   id        : ROTATE_IMAGE.menuId,
   title     : "Rotate Image",
@@ -25,4 +30,6 @@ ROTATE_IMAGE.browser.contextMenus.create({
   ]
 });
 
+// Send the "rotateImage" command/message when
+// the context menu item has been selected.
 ROTATE_IMAGE.browser.contextMenus.onClicked.addListener( ROTATE_IMAGE.sendCommand );
