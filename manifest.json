@@ -1,8 +1,8 @@
 {
   "name"              : "Rotate Image",
-  "version"           : "1.1.0",
-  "description"       : "Context Menu: Rotate an image on a web page in +90 degrees steps",
-  "manifest_version"  : 2,
+  "version"           : "1.2.0",
+  "description"       : "Context Menu: Rotate an image on a web page in +/- 90 degrees steps",
+  "manifest_version"  : 3,
   "background"        : {
     "scripts"     : [
       "backgroundScript.js"
@@ -10,8 +10,8 @@
   },
   "content_scripts"   : [
     {
-      "matches" : ["<all_urls>"],
-      "js"      : ["contentScript.js"]
+      "matches" : [ "<all_urls>" ],
+      "js"      : [ "contentScript.js" ]
     }
   ],
   "permissions"       : [

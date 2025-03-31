@@ -7,10 +7,13 @@ var RotateImageExtension   = {
 
 
 /**
- * Rotate an image by +90 degrees everytime this function is executed.
+ * Rotate an image everytime this function is executed.
  */
-RotateImageExtension.executeCommand  = function() {
-  
+
+RotateImageExtension.executeCommand  = function( direction ) {
+
+  let _direction = ( ( direction.strtolower().trim() === "cw" ) ? "CW" : "CCW" );
+
   // No target image, no rotaion
   if( RotateImageExtension.target === null  ) {
     return;
@@ -37,10 +40,19 @@ RotateImageExtension.executeCommand  = function() {
         
     }
 
-    // Rotate in +90 degrees per execution.
-    // Might be set via extension setting in the future.
-    // But for now, I don't actually see the need for it.
-    rotationValue += 90;
+    // Rotate CLOCKWISE
+    if( _direction === "CW" ) {
+
+      rotationValue += 90;
+
+    }
+    // Rotate COUNTER CLOCKWISE
+    else {
+
+      rotationValue -= 90;
+
+    }
+
     rotationValue = ( rotationValue % 360 );
 
     // The actual rotation will be done via CSS styling
@@ -71,23 +83,37 @@ document.addEventListener( "contextmenu", function( event ) {
  * https://developer.chrome.com/extensions/messaging
  */
 RotateImageExtension.browser.runtime.onMessage.addListener(
-    function( request, sender, sendResponse ) {
+  function( request, sender, sendResponse ) {
+    
+    let response = {
+      message : "Unknown command requested"
+    };
 
-        let response = {
-            message : "Unknown command requested"
-        };
-        
-        if( "string" === typeof request.command && request.command === "rotateImage" ) {
+    if( "string" === typeof request.command ) {
+      
+      
+      if( request.command === "rotateImageCW" ) {
+      
+        RotateImageExtension.executeCommand( "CW" );
 
-            RotateImageExtension.executeCommand();
+        // The message is not actually needed
+        // but might handy for debugging.
+        response.message = "Command Rotate Image CW has been executed";
 
-            // The message is not actually needed
-            // but might handy for debugging.
-            response.message = "Command has been executed";
+      }
+      else if( request.command === "rotateImageCCW" ) {
 
-        }
+        RotateImageExtension.executeCommand( "CCW" );
 
-        sendResponse( response );
+        // The message is not actually needed
+        // but might handy for debugging.
+        response.message = "Command Rotate Image CCW has been executed";
+
+      }
+
+      sendResponse( response );
 
     }
+
+  }
 );
