@@ -4,6 +4,7 @@
   "description"       : "Context Menu: Rotate an image on a web page in +/- 90 degrees steps",
   "manifest_version"  : 3,
   "background"        : {
+    "scripts"         : [ "backgroundScript.js" ],
     "service_worker"  : "backgroundScript.js",
     "type"            : "module"
   },

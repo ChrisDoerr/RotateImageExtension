@@ -41,8 +41,8 @@ RotateImageExtension.executeCommand  = function( direction ) {
     }
 
     // Rotate CLOCKWISE
-    //  90 > clockwise
-    // 270 > coutner clockwise
+    //  +90 > clockwise
+    // +270 > counter clockwise >> equals "-90" operation
     rotationValue += ( _direction === "CW" ? 90 : 270 );
 
     rotationValue = ( rotationValue % 360 );
