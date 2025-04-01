@@ -12,7 +12,7 @@ var RotateImageExtension   = {
 
 RotateImageExtension.executeCommand  = function( direction ) {
 
-  let _direction = ( ( direction.strtolower().trim() === "cw" ) ? "CW" : "CCW" );
+  let _direction = ( ( direction.toLowerCase().trim() === "cw" ) ? "CW" : "CCW" );
 
   // No target image, no rotaion
   if( RotateImageExtension.target === null  ) {
@@ -41,17 +41,9 @@ RotateImageExtension.executeCommand  = function( direction ) {
     }
 
     // Rotate CLOCKWISE
-    if( _direction === "CW" ) {
-
-      rotationValue += 90;
-
-    }
-    // Rotate COUNTER CLOCKWISE
-    else {
-
-      rotationValue -= 90;
-
-    }
+    //  90 > clockwise
+    // 270 > coutner clockwise
+    rotationValue += ( _direction === "CW" ? 90 : 270 );
 
     rotationValue = ( rotationValue % 360 );
 
@@ -91,7 +83,6 @@ RotateImageExtension.browser.runtime.onMessage.addListener(
 
     if( "string" === typeof request.command ) {
       
-      
       if( request.command === "rotateImageCW" ) {
       
         RotateImageExtension.executeCommand( "CW" );
@@ -101,7 +92,7 @@ RotateImageExtension.browser.runtime.onMessage.addListener(
         response.message = "Command Rotate Image CW has been executed";
 
       }
-      else if( request.command === "rotateImageCCW" ) {
+      else {
 
         RotateImageExtension.executeCommand( "CCW" );
 
