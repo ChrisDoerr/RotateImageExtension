@@ -8,6 +8,6 @@ Beware that this rotation will only take place when viewing the
 web page in the browser. When you download the image it will still be
 in the original orientation!
 
-This Firefox extension is available on:
+This Chrome and Firefox extension is available on:
 
 https://addons.mozilla.org/de/firefox/addon/rotate-image/
