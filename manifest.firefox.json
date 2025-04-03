@@ -16,5 +16,10 @@
   "permissions"       : [
     "activeTab",
     "contextMenus"
-  ]
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{bd490218-d863-45c9-8ffa-490ba0a91577}"
+    }
+  }
 }
